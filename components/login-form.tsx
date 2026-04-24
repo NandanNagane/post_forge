@@ -12,12 +12,20 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { TwitterIcon } from "./ui/twitterIcon";
-import { signIn } from "next-auth/react";
+import { authClient } from "@/lib/auth-client";
 
 export default function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const signInTwitter = async () => {
+    const data = await authClient.signIn.social({
+      provider: "twitter",
+    });
+
+    console.log(data);
+  };
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <form>
@@ -54,7 +62,7 @@ export default function LoginForm({
             <Button
               variant="outline"
               type="button"
-              onClick={() => signIn("twitter")}
+              onClick={signInTwitter}
               className={"cursor-pointer"}
             >
               <TwitterIcon />

@@ -12,20 +12,12 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { TwitterIcon } from "./ui/twitterIcon";
-import { authClient } from "@/lib/auth-client";
+import { signInTwitter } from "@/lib/utils";
 
 export default function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const signInTwitter = async () => {
-    const data = await authClient.signIn.social({
-      provider: "twitter",
-    });
-
-    console.log(data);
-  };
-
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <form>
